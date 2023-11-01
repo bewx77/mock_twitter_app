@@ -41,6 +41,7 @@ public class UsersListActivity extends AppCompatActivity {
 
         TextView logOutTextView = findViewById(R.id.logOutTextView);
         Button tweetBtn = findViewById(R.id.tweetButton);
+        Button feedBtn = findViewById(R.id.feedButton);
 
         ListView usersListView = findViewById(R.id.usersListView);
         usersListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
@@ -144,6 +145,13 @@ public class UsersListActivity extends AppCompatActivity {
                     }
                 });
                 builder.show();
+            }
+        });
+        feedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), FeedActivity.class);
+                startActivity(intent);
             }
         });
     }
