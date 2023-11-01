@@ -2,6 +2,7 @@ package com.betheng.clonetwitterapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,10 +20,19 @@ import com.parse.SignUpCallback;
 public class MainActivity extends AppCompatActivity {
     boolean isLogin = true;
 
+    private void gotoUserListActivity(){
+        if (ParseUser.getCurrentUser() != null){
+            Intent intent = new Intent(this, UsersListActivity.class);
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        gotoUserListActivity();
 
         TextView titleTextView = findViewById(R.id.titleTextView);
         EditText usernameEditText = findViewById(R.id.usernameEditText);
@@ -44,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                                 if (e == null){
                                     Log.i("Info","Login Success");
                                     Toast.makeText(getApplicationContext(),"Login Successfully",Toast.LENGTH_SHORT).show();
+                                    gotoUserListActivity();
                                 } else {
                                     e.printStackTrace();
                                     Toast.makeText(getApplicationContext(),e.getMessage().substring(e.getMessage().indexOf(" ")),Toast.LENGTH_SHORT).show();
@@ -64,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                             if (e == null){
                                 Log.i("Info","Sign Up Success");
                                 Toast.makeText(getApplicationContext(),"Sign Up Successfully",Toast.LENGTH_SHORT).show();
+                                gotoUserListActivity();
                             } else {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(),e.getMessage().substring(e.getMessage().indexOf(" ")),Toast.LENGTH_SHORT).show();
